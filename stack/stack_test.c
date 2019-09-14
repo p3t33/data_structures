@@ -1,8 +1,9 @@
 /****************************************************************
 *                       Template for C test code
 * 						========================
-* File Name: template_test.c
-* #Version: V 1.0.4
+* File Name: stack_test.c
+* Related files: stack.h stack_test.c
+* #Version: V 1.0
 * Writer: Kobi Medrish       
 * Created: 14.9.19
 * Last update: 14.9.19

@@ -1,10 +1,10 @@
 #ifndef _STACK_H_
 #define _STACK_H_
 /****************************************************************
-*                                 Stack
+*                     Stack
 * 						=====================
-* File Name: stack.c
-* Related files: stack.h stack_test.c
+* File Name: stack.h
+* Related files: stack.c stack_test.c
 * #Version: V 1.0
 * Writer: Kobi Medrish       
 * Created: 14.9.19
