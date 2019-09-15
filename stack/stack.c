@@ -22,12 +22,11 @@
 /*============================================================================*/
 /*                                                          local directories */
 /*                                                          ~~~~~~~~~~~~~~~~~ */
-
 #include "stack.h" 
+
 /*============================================================================*/
 /*                                                                     Macros */
 /*                                                                     ~~~~~~ */
-
 #define MALLOC_FAIL (NULL)
 #define STACK_IS_FULL (1)
 
@@ -36,9 +35,9 @@
 /*                                                                    ~~~~~~~ */
  struct stack {
 
-    void *end; /* the last position of the stack */
-    void *current; /* most recent element in the stack */
-    size_t element_size; 
+	void *end; /* the last position of the stack */
+	void *current; /* most recent element in the stack */
+	size_t element_size; 
 	char start[1]; /* start of the actual memory allocated for the elements */
 };
 
@@ -50,18 +49,18 @@
 stack_t *StackCreate(size_t element_size, size_t capacity)
 {
 	/* A pointer to managing struct and stack storage is created */
-    stack_t* stack_ptr = (stack_t*)malloc(sizeof(stack_t) +
-	                                       (element_size * capacity));
+	stack_t* stack_ptr = (stack_t*)malloc(sizeof(stack_t) +
+											(element_size * capacity));
 	if (MALLOC_FAIL == stack_ptr)
 	{
 		return (MALLOC_FAIL);
 	}
-	
+
 	stack_ptr->end = stack_ptr->start + (element_size * (capacity));
 	stack_ptr->current = stack_ptr->start;
-    stack_ptr-> element_size = element_size;
+	stack_ptr-> element_size = element_size;
 
-    return (stack_ptr);
+	return (stack_ptr);
 }
 
 /*============================================================================*/
@@ -70,9 +69,9 @@ stack_t *StackCreate(size_t element_size, size_t capacity)
 void StackDestroy(stack_t *stack_ptr)
 {
 	assert(stack_ptr);
-	
-    free(stack_ptr);
-    stack_ptr = NULL;
+
+	free(stack_ptr);
+	stack_ptr = NULL;
 }
 
 /*============================================================================*/
@@ -100,11 +99,11 @@ int StackPush(stack_t *stack_ptr, const void *element)
 void StackPop(stack_t *stack_ptr)
 {
 	assert(stack_ptr);
-	
+
 	if (stack_ptr->current != (void*)stack_ptr->start)
 	{
 		stack_ptr->current = (char*)stack_ptr->current - 
-		                      stack_ptr->element_size;
+								stack_ptr->element_size;
 	}
 }
 
@@ -129,8 +128,8 @@ void *StackPeek(const stack_t *stack_ptr)
 size_t StackSize(const stack_t *stack_ptr)
 {
 	assert(stack_ptr);
-	
+
 	return (((size_t*)stack_ptr->current - (size_t*)stack_ptr->start) /
-	         stack_ptr->element_size);
-	
+				stack_ptr->element_size);
+
 }
