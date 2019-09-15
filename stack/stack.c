@@ -50,7 +50,7 @@ stack_t *StackCreate(size_t element_size, size_t capacity)
 {
 	/* A pointer to managing struct and stack storage is created */
 	stack_t* stack_ptr = (stack_t*)malloc(sizeof(stack_t) +
-											(element_size * capacity));
+						                 (element_size * capacity));
 	if (MALLOC_FAIL == stack_ptr)
 	{
 		return (MALLOC_FAIL);
@@ -103,10 +103,9 @@ void StackPop(stack_t *stack_ptr)
 	if (stack_ptr->current != (void*)stack_ptr->start)
 	{
 		stack_ptr->current = (char*)stack_ptr->current - 
-								stack_ptr->element_size;
+                             stack_ptr->element_size;
 	}
 }
-
 
 /*============================================================================*/
 /*                                                                  StackPeek */
@@ -131,5 +130,4 @@ size_t StackSize(const stack_t *stack_ptr)
 
 	return (((size_t*)stack_ptr->current - (size_t*)stack_ptr->start) /
 				stack_ptr->element_size);
-
 }
