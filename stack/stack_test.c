@@ -1,6 +1,6 @@
 /****************************************************************
 *                       Template for C test code
-* 						========================
+*                       ========================
 * File Name: stack_test.c
 * Related files: stack.h stack_test.c
 * #Version: V 1.0

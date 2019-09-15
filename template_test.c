@@ -1,6 +1,6 @@
 /****************************************************************
 *                       Template for C test code
-* 						========================
+*                       ========================
 * File Name: template_test.c
 * #Version: V 1.0.4
 * Writer: Kobi Medrish       

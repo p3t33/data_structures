@@ -2,7 +2,7 @@
 #define _STACK_H_
 /****************************************************************
 *                     Stack
-* 						=====================
+*              =====================
 * File Name: stack.h
 * Related files: stack.c stack_test.c
 * #Version: V 1.0

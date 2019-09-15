@@ -1,6 +1,6 @@
 /****************************************************************
 *                              Stack
-* 						=====================
+*                     =====================
 * File Name: stack.c
 * Related files: stack.h stack_test.c
 * #Version: V 1.0
@@ -45,7 +45,7 @@
 /*============================================================================*/
 /*                               API functions                                */
 /*============================================================================*/
-/*  									                          StackCreate */
+/*                                                                StackCreate */
 /*                                                                ~~~~~~~~~~~ */
 stack_t *StackCreate(size_t element_size, size_t capacity)
 {
@@ -65,7 +65,7 @@ stack_t *StackCreate(size_t element_size, size_t capacity)
 }
 
 /*============================================================================*/
-/*  									                         StackDestroy */
+/*                                                               StackDestroy */
 /*                                                               ~~~~~~~~~~~~ */
 void StackDestroy(stack_t *stack_ptr)
 {
@@ -76,7 +76,7 @@ void StackDestroy(stack_t *stack_ptr)
 }
 
 /*============================================================================*/
-/*  									                            StackPush */
+/*                                                                  StackPush */
 /*                                                                  ~~~~~~~~~ */
 int StackPush(stack_t *stack_ptr, const void *element)
 {
@@ -95,7 +95,7 @@ int StackPush(stack_t *stack_ptr, const void *element)
 }
 
 /*============================================================================*/
-/*  									                             StackPop */
+/*                                                                   StackPop */
 /*                                                                   ~~~~~~~~ */
 void StackPop(stack_t *stack_ptr)
 {
@@ -110,7 +110,7 @@ void StackPop(stack_t *stack_ptr)
 
 
 /*============================================================================*/
-/*  									                            StackPeek */
+/*                                                                  StackPeek */
 /*                                                                  ~~~~~~~~~ */
 void *StackPeek(const stack_t *stack_ptr)
 {
@@ -124,7 +124,7 @@ void *StackPeek(const stack_t *stack_ptr)
 }
 
 /*============================================================================*/
-/*  									                            StackSize */
+/*                                                                  StackSize */
 /*                                                                  ~~~~~~~~~ */
 size_t StackSize(const stack_t *stack_ptr)
 {
