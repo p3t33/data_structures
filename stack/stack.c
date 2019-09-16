@@ -51,8 +51,8 @@
 stack_t *StackCreate(size_t element_size, size_t capacity)
 {
 	/* A pointer to managing struct and stack storage is created */
-	stack_t* stack_ptr = (stack_t*)malloc(sizeof(stack_t) +
-						                 (element_size * capacity));
+	stack_t* stack_ptr = (stack_t*)malloc(sizeof(stack_t) + 
+	                                     (element_size * capacity));
 	if (MALLOC_FAIL == stack_ptr)
 	{
 		return (MALLOC_FAIL);
