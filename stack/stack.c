@@ -40,7 +40,7 @@
 	void *end; /* the last position of the stack */
 	void *current; /* most recent element in the stack */
 	size_t element_size; 
-	char start[1]; /* start of the actual memory allocated for the elements */
+	char head[1]; /* head of the actual memory allocated for the elements */
 };
 
 /*============================================================================*/
@@ -50,7 +50,7 @@
 /*                                                                ~~~~~~~~~~~ */
 stack_t *StackCreate(size_t element_size, size_t capacity)
 {
-	/* A pointer to managing struct and stack storage is created */
+    /* A pointer to managing struct and stack storage is created */
 	stack_t* stack_ptr = (stack_t*)malloc(sizeof(stack_t) + 
 	                                     (element_size * capacity));
 	if (MALLOC_FAIL == stack_ptr)
@@ -58,8 +58,8 @@ stack_t *StackCreate(size_t element_size, size_t capacity)
 		return (MALLOC_FAIL);
 	}
 
-	stack_ptr->end = stack_ptr->start + (element_size * (capacity));
-	stack_ptr->current = stack_ptr->start;
+	stack_ptr->end = stack_ptr->head + (element_size * (capacity));
+	stack_ptr->current = stack_ptr->head;
 	stack_ptr-> element_size = element_size;
 
 	return (stack_ptr);
@@ -130,7 +130,7 @@ size_t StackSize(const stack_t *stack_ptr)
 {
 	assert(stack_ptr);
 
-	return(((char*)stack_ptr->current - stack_ptr->start) /
+	return(((char*)stack_ptr->current - stack_ptr->head) /
 	         stack_ptr->element_size);
 }
 
@@ -140,7 +140,7 @@ size_t StackSize(const stack_t *stack_ptr)
  size_t StackIsEmpty(const stack_t *stack_ptr)
  {
 	assert(stack_ptr);
-	return (stack_ptr->current == stack_ptr->start);
+	return (stack_ptr->current == stack_ptr->head);
  }
 
 /*============================================================================*/
