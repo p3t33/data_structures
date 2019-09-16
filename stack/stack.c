@@ -29,6 +29,8 @@
 /*                                                                     ~~~~~~ */
 #define MALLOC_FAIL (NULL)
 #define STACK_IS_FULL (1)
+#define TRUE 1
+#define FALSE 0
 
 /*============================================================================*/
 /*                                                                    structs */
@@ -82,7 +84,7 @@ int StackPush(stack_t *stack_ptr, const void *element)
 	assert(stack_ptr);
 	assert(element);
 
-	if (stack_ptr->end == stack_ptr->current)
+	if (TRUE == StackIsFull(stack_ptr))
 	{
 		return(STACK_IS_FULL);
 	}
@@ -100,7 +102,7 @@ void StackPop(stack_t *stack_ptr)
 {
 	assert(stack_ptr);
 
-	if (stack_ptr->current != (void*)stack_ptr->start)
+	if (TRUE != StackIsEmpty(stack_ptr))
 	{
 		stack_ptr->current = (char*)stack_ptr->current - 
                              stack_ptr->element_size;
@@ -113,7 +115,7 @@ void StackPop(stack_t *stack_ptr)
 void *StackPeek(const stack_t *stack_ptr)
 {
 	assert(stack_ptr);
-	if (stack_ptr->start == stack_ptr->current)
+	if (TRUE == StackIsEmpty(stack_ptr))
 	{
 		return(NULL);
 	}
@@ -131,3 +133,19 @@ size_t StackSize(const stack_t *stack_ptr)
 	return (((size_t*)stack_ptr->current - (size_t*)stack_ptr->start) /
 				stack_ptr->element_size);
 }
+
+/*============================================================================*/
+/*                                                               StackIsEmpty */
+/*                                                               ~~~~~~~~~~~~ */
+ size_t StackIsEmpty(const stack_t *stack_ptr)
+ {
+	 return (stack_ptr->current == stack_ptr->start);
+ }
+
+/*============================================================================*/
+/*                                                                StackIsFull */
+/*                                                                ~~~~~~~~~~~ */
+ size_t StackIsFull(const stack_t *stack_ptr)
+ {
+	 return (stack_ptr->current == stack_ptr->end);
+ }

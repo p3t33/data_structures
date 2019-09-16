@@ -80,16 +80,40 @@ void *StackPeek(const stack_t *stack_ptr);
   * Complexity: O(1) 
   */
 
+
 size_t StackSize(const stack_t *stack_ptr);
  /* 
   * Returns the number of inserted elemnts to the stack.
   *  
   * Params: 
-  *		  queue - the queue. 
-  *		  data  - the data to be inserted.
+  *		  stack_ptr - pointer to the stack. 
   * Return value : 
   *        size of the stack
   * Complexity: O(1)
   */
+
+
+ size_t StackIsEmpty(const stack_t *stack_ptr);
+  /* 
+   * Checks if the stack is empty
+   *  
+   * Params: 
+   *		  stack_ptr - pointer to the stack. 
+   * Return value : 
+   *        0 -(stack is not empty), 1-(stack is empty).
+   * Complexity: O(1)
+   */
+
+
+ size_t StackIsFull(const stack_t *stack_ptr);
+  /* 
+   * Checks if the stack is full.
+   *  
+   * Params: 
+   *		  stack_ptr - pointer to the stack. 
+   * Return value : 
+   *        0 -(stack is not full), 1-(stack is full).
+   * Complexity: O(1)
+   */
 
 #endif /* _STACK_H_ */

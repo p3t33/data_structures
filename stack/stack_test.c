@@ -1,5 +1,5 @@
-/****************************************************************
-*                       Template for C test code
+/*******************************************************************************
+*                             stack_test.c
 *                       ========================
 * File Name: stack_test.c
 * Related files: stack.h stack_test.c
@@ -7,7 +7,7 @@
 * Writer: Kobi Medrish       
 * Created: 14.9.19
 * Last update: 14.9.19
-****************************************************************/
+*******************************************************************************/
 
 
 /*============================================================================*/
@@ -50,7 +50,7 @@
 /*                                                                 ~~~~~~~~~~ */
 static void UnitTestStackCreate(void);
 static void UnitTestStackPush(void);
-static void UnitTestZ(void);
+static void UnitTestStackPop(void);
 static void UnitTestK(void);
 static void UnitTestM(void);
 static void UnitTestA(void);
@@ -72,14 +72,14 @@ int main()
 {
     UnitTestStackCreate();
     UnitTestStackPush();
-    UnitTestZ();
+/*     UnitTestStackPop();
     UnitTestK();
     UnitTestM();
     UnitTestA();
     UnitTestB();
     UnitTestC();
     UnitTestD();
-    UnitTestE();
+    UnitTestE(); */
   
     return (0);
 }
@@ -93,7 +93,7 @@ int main()
 static void UnitTestStackCreate(void)
 {
 	stack_t *stack_handle = StackCreate(ELEMENT_SIZE, STACK_CAPACITY);
-	size_t size_of_Stack = 0;
+
 
     printf("===================== UnitTestStackCreate ==================\n");    
   
@@ -106,20 +106,39 @@ static void UnitTestStackCreate(void)
 		printf("Stack created:" RED "FAILURE\n" RESET);
 	}
 
-	size_of_Stack = StackSize(stack_handle);
-	if (0 == size_of_Stack)
+
+	if (0 == StackSize(stack_handle))
 	{
-		printf("Stack is empty:" GREEN "SUCCESS\n" RESET);
+		printf("StackSize on empty stack :" GREEN "SUCCESS\n" RESET);
 	}
 	else
 	{
-		printf("Stack is empty:" RED "FAILURE\n" RESET);
+		printf("StackSize on empty stack:" RED "FAILURE\n" RESET);
+	}
+	
+	if (1 == StackIsEmpty(stack_handle))
+	{
+		printf("StackIsEmpty on empty stack :" GREEN "SUCCESS\n" RESET);
+	}
+	else
+	{
+		printf("StackIsEmpty on empty stack:" RED "FAILURE\n" RESET);
+	}
+
+
+	if (0 == StackIsFull(stack_handle))
+	{
+		printf("StackIsFull on empty stack :" GREEN "SUCCESS\n" RESET);
+	}
+	else
+	{
+		printf("StackIsFull on empty stack:" RED "FAILURE\n" RESET);
 	}
 	
 
 	StackDestroy(stack_handle);
 
-    printf("=============================================================\n\n");
+    printf("============================================================\n\n");
 }
 
 /*============================================================================*/
@@ -127,45 +146,75 @@ static void UnitTestStackCreate(void)
 static void UnitTestStackPush(void)
 {
 	stack_t *stack_handle = StackCreate(ELEMENT_SIZE, STACK_CAPACITY);
-	size_t size_of_Stack = 0;
 
 	int source[5] = {8, 2, 3, 4, 5};
 	size_t i = 0;
-    printf("======================== UnitTestStackPush ======================\n");    
+    printf("===================== UnitTestStackPush ====================\n");    
     
+	puts("push 5 numbers to the stack");
+
 	for (i = 0; i < STACK_CAPACITY; ++i)
 	{
 		StackPush(stack_handle, &source[i]);
 
-		printf("%d", *(int*)StackPeek(stack_handle));
-
-		printf("\n");
-	
+		printf("%d ", *(int*)StackPeek(stack_handle));
 	}
 	
+	puts("");
 
 	if (1 == StackPush(stack_handle, &source[0]))
 	{
-		printf("stack is full\n");
+		printf("StackPush to full stack :" GREEN "SUCCESS\n" RESET);
+	}
+	else
+	{
+		printf("StackPush to full stack :" RED "FAILURE\n" RESET);	
+	}
+
+	printf("%lu\n", StackSize(stack_handle));
+
+	if (5 == StackSize(stack_handle))
+	{
+		printf("StackSize on empty stack :" GREEN "SUCCESS\n" RESET);
+	}
+	else
+	{
+		printf("StackSize on empty stack:" RED "FAILURE\n" RESET);
+	}
+	
+	
+	if (0 == StackIsEmpty(stack_handle))
+	{
+		printf("StackIsEmpty on full stack :" GREEN "SUCCESS\n" RESET);
+	}
+	else
+	{
+		printf("StackIsEmpty on full stack:" RED "FAILURE\n" RESET);
+	}
+
+	
+	if (1 == StackIsFull(stack_handle))
+	{
+		printf("StackIsFull on full stack :" GREEN "SUCCESS\n" RESET);
+	}
+	else
+	{
+		printf("StackIsFull on full stack:" RED "FAILURE\n" RESET);
 	}
 
 
 
-
-
-
-
-
+	
 	StackDestroy(stack_handle);
 
-    printf("=============================================================\n\n");
+    printf("============================================================\n\n");
 }
 
 /*============================================================================*/
-/*                                               UnitTestZ */
-static void UnitTestZ(void)
+/*                                               UnitTestStackPop */
+static void UnitTestStackPop(void)
 {
-    printf("======================== UnitTestZ ======================\n");    
+    printf("======================== UnitTestStackPop ======================\n");    
    
 
     printf("=============================================================\n\n");
