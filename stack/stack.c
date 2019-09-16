@@ -130,8 +130,8 @@ size_t StackSize(const stack_t *stack_ptr)
 {
 	assert(stack_ptr);
 
-	return (((size_t*)stack_ptr->current - (size_t*)stack_ptr->start) /
-				stack_ptr->element_size);
+	return(((char*)stack_ptr->current - (char*)stack_ptr->start) / stack_ptr->element_size);
+
 }
 
 /*============================================================================*/
