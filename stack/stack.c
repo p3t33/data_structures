@@ -35,8 +35,8 @@
 /*============================================================================*/
 /*                                                                    structs */
 /*                                                                    ~~~~~~~ */
- struct stack {
-
+struct stack
+{
 	void *end; /* the last position of the stack */
 	void *current; /* most recent element in the stack */
 	size_t element_size; 

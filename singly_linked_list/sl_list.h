@@ -3,8 +3,8 @@
 /*******************************************************************************
 *                     singly linked list
 *                   =====================
-* File Name: sl_list.c sl_list_test.c
-* Related files: stack.c stack_test.c
+* File Name: sl_list.h
+* Related files: sl_list.c sl_list_test.c
 * #Version: V 1.0
 * Writer: Kobi Medrish       
 * Created: 19.9.19
@@ -21,36 +21,38 @@
  * the entire array because the nodes in a linked list do not need to be stored
  * contiguously in memory. However, nodes in the list cannot be accessed by 
  * index and instead must be accessed by traversing the list.
+ * 
+ * note that last node of the list cannot be removed
 */  
 
-
+/* forward declarations */
 typedef int (action_function_t)(void *data, void* param);
 typedef int (is_match_function_t)(void *data, void* param);
 
- 
-typedef struct sl_node{    	  	
-		void *data;
-		struct sl_node *next; 
-
+typedef struct sl_node
+{
+	void *data;
+	struct sl_node *next; 
 }sl_node_t;
 
 
 sl_node_t *SLLCreate(void *data, sl_node_t *next);
-/* Create a node, can connect the new node to other existing nodes.
+/* Create a node. May connect new node to other existing nodes.
  *
  * Params:
- *		  next - pointer to the node that will be pointed by the created node.
+ *		  next - Pointer to the node that will be pointed by the created node.
  *				 (NULL if node does not point to any other node).
- *		  data - pointer to the data that will be inserted to the node.
+ *		  data - Pointer to the data that will be inserted to the node.
  * Return Value: 
  *		  pointer to the created node. 
  */
 
 
 void SLLDestroy(sl_node_t *node);	  
-/* Destroy the linked list - free all allocated memory from a given position.
+/*
+ * Destroy linked list by frying allocated memory 
  * Params: 
- *		  node - reference node.
+ *		  node - Reference node to the list to destory
  *
  * Time complexity: O(n).
  */
@@ -59,57 +61,65 @@ void SLLDestroy(sl_node_t *node);
 sl_node_t *SLLInsert(sl_node_t *node_to_insert, sl_node_t *node_location);
 /* Insert a node before a given location.
  * Params: 
- *		  node_to_insert - desired node to be inserted. 
- *		  node_location  - node that will be pointed to by the inserted node.
+ *		  node_to_insert - Pointer to desired node to be inserted. 
+ *		  node_location - Pointer to a node which will be pointed by the node to
+ *                        be inserted.
  * Return value : 
- *        pointer to inserted node
+ *        Pointer to inserted node
+ * Time complexity: O(1)
  */
 
 
 sl_node_t *SLLInsertAfter(sl_node_t *node_to_insert, sl_node_t *node_location);
 /* Insert a node after a given location.
  * Params: 
- *		  node_location  - the node that will point to the inserted node.
- *		  node_to_insert - the node to be inserted.
+ *		  node_to_insert - Pointer to desired node to be inserted.
+ *		  node_location - Pointer to a node which will be pointing to the node
+ *                        to be inserted 
  * Return value : 
  *        pointer to inserted node. 
+ * Time complexity: O(1)
  */
 
 
 sl_node_t *SLLRemove(sl_node_t *node_to_remove);
-/* Remove a node from a given location.Cannot remove the last node from a list.
+/* Remove a node from a given location. Cannot remove the last node from a list.
  * Params: 
- *		  node_to_remove - the node that will be removed from list.
- * Return value : a pointer to the removed node.
+ *		  node_to_remove - the node to be removed from the list.
+ * Return value : A pointer to the removed node.
+ * Time complexity: O(1)
  */
 
 
 sl_node_t *SLLRemoveAfter(sl_node_t *location);
 /* Remove a node from the list after a given location.
  * Params: 
- *		  location  - the node that points to the node to be removed.
+ *		  location - Pointer to a nodes which points to the node to be removed.
  * Return value : 
- *		  a pointer to the removed node. 
+ *		  A pointer to the removed node. 
+ * Time complexity: O(1)
  */
 
 
 int SLLForEach(sl_node_t *node, action_function_t func, void *param);
-/* Apply <action_func> on all nodes starting from <node>.
+/* Apply <action_func> for all nodes starting from <node>.
  * Params: 
  *		  node - reference node.
  *
  * Return value : 
- *       success / type of failure.
+ *       0-(success), 1-(failure).
+ * Time complexity: O(n)
  */
 
-
+/*TODO: params */
 sl_node_t *SLLFind(sl_node_t *node, is_match_function_t func, void *param);
-/* Find if a certain data matches data on the list.
+/* checks if a certain data matches a data on the list.
  * Params: 
  *		  node - data to be evaluated.
  *		  data - the data to be matched.	
  * Return value : 
  *		  pointer to node that holds relevant data.
+ * Time complexity: O(n)
  */
 
 
@@ -119,6 +129,7 @@ size_t SLLCount(const sl_node_t *node);
  *		  node - reference node.
  * Return value : 
  *		  number of nodes on the list.
+ * Time complexity: O(n)
  */
 
 
@@ -128,26 +139,36 @@ sl_node_t *SLLFlip(sl_node_t *node);
  *		  node - reference node.
  * Return value : 
  *		  a pointer to the new first node of the list.
+ * Time complexity: O(n)
  */
 
 
-sl_node_t *SLLFindIntersection(const sl_node_t *node_1, 
-       						   const sl_node_t *node_2);
+sl_node_t *SLLFindIntersection(const sl_node_t *list_1, 
+       						   const sl_node_t *list_2);
 /* Find intersections - a shared node between two lists.
  * Params: 
  *		  node_1 - reference node of first list.
  * 		  node_2 - reference node of second list.
  * Time complexity: O(n).
  * Return value : a pointer to the shared node.
+ * Time complexity: O(n)
  */
 
 
-int SLLHasLoop(sl_node_t *node);
+sl_node_t *SLLIsListHasLoop(sl_node_t *node);
 /* Finds if a loop exists within the list.
  * Params: 
- *		  node  - reference node.
- * Return value : 1 if loop found, 0 if not.
+ *		  node  - pointer to the list.
+ * Return value : Pointer to a node in the loop if loop is found, NULL if no 
+ *                loop is found
+ * Time complexity: O(n)
  */
 
+void SLLRemoveLoop(sl_node_t *node);
+/* If loop exists within the list it will be opened.
+ * Params: 
+ *		  node - pointer to the list.
+ * Time complexity: O(n)
+ */
 
 #endif /* _SL_LIST_ */
