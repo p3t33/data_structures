@@ -22,8 +22,12 @@
  * contiguously in memory. However, nodes in the list cannot be accessed by 
  * index and instead must be accessed by traversing the list.
  * 
+ * This is an infrastructure implementation to be wrapped and used by other 
+ * data structures
+ * 
  * note that last node of the list cannot be removed
-*/  
+ * note
+ */  
 
 /* forward declarations */
 typedef int (action_function_t)(void *data, void* param);
