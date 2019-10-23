@@ -46,7 +46,7 @@ Each API has version and date of last update.
 
 ## Authors
 
-* **Kobi Medrish**  -  [github](hhttps://github.com/p3t33)
+* **Kobi Medrish**  -  [github](https://github.com/p3t33)
 
 ## License
 
