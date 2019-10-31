@@ -8,7 +8,7 @@
 * #Version: V 1.0
 * Writer: Kobi Medrish       
 * Created: 24.10.19
-* Last update: 24.10.19
+* Last update: 29.10.19
 *******************************************************************************/
 
 
@@ -28,47 +28,81 @@ typedef enum BOOL {FALSE, TRUE} bool_t; /* std=98 compliant */
 /*============================================================================*/
 
 
-uint64_t AllOn(uint64_t *bit_array);
+void AllOn(uint64_t *bit_array);
 /*
- * turn on all bits in  bit_array 
+ * Turn on all bits in  bit_array 
  */
 
-uint64_t AllOff(uint64_t *bit_array);
+
+void AllOff(uint64_t *bit_array);
 /*
- * turn off all bits in  bit_array  
+ * Turn off all bits in  bit_array  
  */
 
-/* set on/off a specific bit <index> in bit array */
-uint64_t SetOn(uint64_t *bit_array, size_t index);
+
+void SetOn(uint64_t *bit_array, size_t index);
 /*
- * set on a specific bit in bit_array 
+ * Set on a specific bit in bit_array 
  */
 
-uint64_t SetOff(uint64_t *bit_array, size_t index);
+
+void SetOff(uint64_t *bit_array, size_t index);
 /*
- * set off a specific bit in bit_array 
+ * Set off a specific bit in bit_array 
  */
 
-/* set bit <#index> to status <value> */
-uint64_t SetBit(uint64_t *bit_array, size_t index, char value);
 
-/* return TRUE / FALSE according to bit <#index> status */
+void SetBit(uint64_t *bit_array, size_t index, char value);
+/*
+ * Set bit at specifed index to be on or off
+ */
+
+
 bool_t IsOn(uint64_t *bit_array, size_t index);
+/*
+ * Return TRUE if bit at specifed index is set and FALSE if not. 
+ */
+
+
 bool_t IsOff(uint64_t *bit_array, size_t index);
+/*
+ * Return TRUE if bit at specifed index is not set and FALSE if it is.
+ */
 
-/* switch status of bit <#index> */
-uint64_t FlipBit(uint64_t *bit_array, size_t index);
 
-/* rotate <bit_array> left/right, n times */ 
-uint64_t RotateLeft(uint64_t *bit_array, size_t offset);
-uint64_t RotateRight(uint64_t *bit_array, size_t offset);
+void FlipBit(uint64_t *bit_array, size_t index);
+/*
+ * Switch status of a bit (1 -> 0 amd 0 -> 1) at specifed index  
+ */
+ 
 
-/* mirror <bit_array> */
-uint64_t Mirror(uint64_t *bit_array);
+void RotateLeft(uint64_t *bit_array, size_t offset);
+/*
+ * Rotate bit_array  left, n times
+ */
 
-/* return number of bit on/off in <bit_array> */
-size_t CountOn(uint64_t *bit_array);
-size_t CountOff(uint64_t *bit_array);
+
+void RotateRight(uint64_t *bit_array, size_t offset);
+/*
+ * Rotate bit_array right, n times
+ */
+
+
+void Mirror(uint64_t *bit_array);
+/*
+ * Mirror bit_array
+ */
+
+
+size_t CountOn(uint64_t bit_array);
+/*
+ * Return number of set bits in bit_array
+ */
+
+
+size_t CountOff(uint64_t bit_array);
+/*
+ * Return number of unset bits in bit_array
+ */
 
 #endif /* _BIT_ARRAY_ */
-
