@@ -16,7 +16,7 @@
 #include <vector> // vector
 
 
-namespace hrd9
+namespace med
 {
 
 template <typename T>
@@ -53,9 +53,9 @@ template <typename T>
 class AVL
 {
     private:
-        using compare_t = std::function<int(const T data1, const T data2)>;
-        using action_func_t = std::function<int(T data)>;
-        using is_match_t = std::function<int(T data, T arg)>;
+        using compare_t = std::function<int(const T& data1, const T& data2)>;
+        using action_func_t = std::function<int(const T& data)>;
+        using is_match_t = std::function<int(const T& data, const T& arg)>;
 
         enum children {LEFT, RIGHT};
 
@@ -196,17 +196,6 @@ void AVL<T>::destroy_node(AVL_node<T>* node)
 /*                               ~~~~~~~~~~~~~~~~                             */
 /*                               member functions                             */
 /*                               ~~~~~~~~~~~~~~~~                             */
-
-
-/*============================================================================*/
-/*                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~                        */
-/*                        friend / operators functions                        */
-/*                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~                        */
-
-
-
-
-
 
 /*============================================================================*/
 /*                     API functions / Public member functions                */
@@ -522,7 +511,7 @@ AVL_node<T>* AVL<T>::remove_node(AVL_node<T>* node)
            Overite the data in the node. once it will be found ut will have 
            one ore zero children and will be handled by simple cases in 
            RemoveNode */
-		node->m_children[RIGHT] = remove_recursive(node->m_children[RIGHT],
+	    node->m_children[RIGHT] = remove_recursive(node->m_children[RIGHT],
                                                    node->m_data);
     }
     

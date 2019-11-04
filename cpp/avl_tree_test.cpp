@@ -21,95 +21,61 @@
 /*                                                          local directories */
 /*                                                          ~~~~~~~~~~~~~~~~~ */
 #include "avl_tree.hpp"
+
 /*============================================================================*/
 /*                                                                     Macros */
 /*                                                                     ~~~~~~ */
+using namespace med;
 
-
-using namespace hrd9;
-/*============================================================================*/
-/*                             function declarations                          */
-/*----------------------------------------------------------------------------*/
-/*                                                                 Unit tests */
-
-
-
-/*                                                           Integration Test */      
 /*============================================================================*/
 /*                                                              User function */
-int int_data_compare(const int data1, const int data2);
-int action_print_int(int data);
-int is_match(int data, int arg);
-/*============================================================================*/
-/*                                                                      enums */
-/*                                                                      ~~~~~ */
+int int_data_compare(const int& data1, const int& data2);
+int action_print_int(const int& data);
+int is_match(const int& data, const int& arg);
 
-
-/*============================================================================*/
-/*                                                                    structs */
-/*                                                                    ~~~~~~~ */
- 
 /*============================================================================*/
 /*                                                                     Colors */
 /*                                                                     ~~~~~~ */
 const char* const green = "\033[1;32m";
 const char* const red = "\033[1;32m";
 const char* const reset = "\033[0m"; 
+
 /*============================================================================*/
 /*                             ~~~~~~~~~~~~~~~~~~~                            */
 /*                             Forward declaration                            */
 /*                             ~~~~~~~~~~~~~~~~~~~                            */
 /*                                                                 Unit tests */
 /*                                                                 ~~~~~~~~~~ */
-static void unit_test_remove_allVL_create(void);
+static void unit_test_remove_create(void);
 static void Unit_test_insert(void);
 static void unit_test_remove(void);
 static void unit_test_balancing(void);
 static void unit_test_find_all(void);
-static void unit_test_remove_all(void);
-
-
-/*                                                           Integration Test */ 
-/*                                                           ~~~~~~~~~~~~~~~~ */  
-   
-/*============================================================================*/
-/*                                                              User function */
-/*                                                              ~~~~~~~~~~~~~ */
+static void unit_test_remove_all(void);  
 
 /*============================================================================*/
 
 int main()
 {
-    unit_test_remove_allVL_create();
+    unit_test_remove_create();
     Unit_test_insert();
-
-    
     unit_test_remove();
-  
     unit_test_balancing();
-  
-    unit_test_find_all();
-     
+    unit_test_find_all(); 
     unit_test_remove_all();
 
-    /* 
-    unit_test_b();
-    unit_test_c();
-    unit_test_d();
-    unit_test_e(); */
-  
     return (0);
 }
 
 /*============================================================================*/
 /*                                 unit_test_s                                */
 /*============================================================================*/
-/*                                                                  unit_test_remove_allVL_create */
-/*                                                                  ~~~~~~~~~ */
+/*                                                    unit_test_remove_create */
+/*                                                    ~~~~~~~~~~~~~~~~~~~~~~~ */
 
-static void unit_test_remove_allVL_create(void)
+static void unit_test_remove_create(void)
 {  
-    std::cout << "=================== unit_test_remove_allVL_create ================"<< std::endl;
+    std::cout << "============= unit_test_remove_create =========="<< std::endl;
 
     AVL<int> tree(int_data_compare);
 
@@ -137,11 +103,11 @@ static void unit_test_remove_allVL_create(void)
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-/*                                                                  Unit_test_insert */
-/*                                                                  ~~~~~~~~~ */
+/*                                                           Unit_test_insert */
+/*                                                           ~~~~~~~~~~~~~~~ */
 static void Unit_test_insert(void)
 {
-    std::cout << "=================== Unit_test_insert ================"<< std::endl;    
+    std::cout << "================= Unit_test_insert ============="<< std::endl;    
 
     int at_tree = 5, i = 0, not_at_tree = 20;
     int arr[] = {1 ,50 , 5, 7, 19, 35}; 
@@ -191,11 +157,11 @@ static void Unit_test_insert(void)
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-/*                                                                  unit_test_remove */
-/*                                                                  ~~~~~~~~~ */
+/*                                                           unit_test_remove */
+/*                                                           ~~~~~~~~~~~~~~~~ */
 static void unit_test_remove(void)
 {
-    std::cout << "=================== unit_test_remove ================"<< std::endl;    
+    std::cout << "================ unit_test_remove =============="<< std::endl;    
    
     int arr[] = {5 ,10 , 3, 7, 19, 35, 4, 2, 1}; 
 
@@ -211,7 +177,6 @@ static void unit_test_remove(void)
         tree.insert(&arr[i]);
 
     }
-
 
     std::cout << "number of elements in the tree\n"<< tree.count() << std::endl;
 
@@ -232,19 +197,15 @@ static void unit_test_remove(void)
     std::cout << std::endl;
 
 
-
-
-
-
     std::cout << "================================================"<< std::endl;
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-/*                                                                  unit_test_balancing */
-/*                                                                  ~~~~~~~~~ */
+/*                                                        unit_test_balancing */
+/*                                                        ~~~~~~~~~~~~~~~~~~~ */
 static void unit_test_balancing(void)
 {
-    std::cout << "=================== unit_test_balancing ================"<< std::endl;    
+    std::cout << "=============== unit_test_balancing ============"<< std::endl;    
     
     int i = 0;
     int arr[] = {2 ,1, 3, 4, 5, 6, 7, 8, 9}; 
@@ -270,11 +231,11 @@ static void unit_test_balancing(void)
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-/*                                                                  unit_test_find_all */
-/*                                                                  ~~~~~~~~~ */
+/*                                                         unit_test_find_all */
+/*                                                         ~~~~~~~~~~~~~~~~~~ */
 static void unit_test_find_all(void)
 {
-    std::cout << "=================== unit_test_find_all ================"<< std::endl;    
+    std::cout << "================ unit_test_find_all ============="<< std::endl;    
    
     int i = 0;
     int arr[] = {2 ,1, 3, 4, 5, 6, 7, 8, 9}; 
@@ -306,16 +267,15 @@ static void unit_test_find_all(void)
 
     std::cout << std::endl;
 
-
     std::cout << "================================================"<< std::endl;
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-/*                                                                  unit_test_remove_all */
-/*                                                                  ~~~~~~~~~ */
+/*                                                       unit_test_remove_all */
+/*                                                       ~~~~~~~~~~~~~~~~~~~~ */
 static void unit_test_remove_all(void)
 {
-    std::cout << "=================== unit_test_remove_all ================"<< std::endl;    
+    std::cout << "=============== unit_test_remove_all ==========="<< std::endl;    
     
     int i = 0;
     int arr[] = {5 ,10 , 3, 7, 19, 35, 4, 2, 1};
@@ -350,25 +310,27 @@ static void unit_test_remove_all(void)
 /*============================================================================*/
 /*                                   User function                            */             
 /*============================================================================*/
-/*                                                             int_data_compare */
-int int_data_compare(const int data1, const  int data2)
+/*                                                           int_data_compare */
+/*                                                           ~~~~~~~~~~~~~~~~ */
+int int_data_compare(const int& data1, const int& data2)
 {
-
 	return (data1 - data2);
 }
 
 /*============================================================================*/
 /*                                                           action print int */
-int action_print_int(int data)
+/*                                                           ~~~~~~~~~~~~~~~~ */
+int action_print_int(const int& data)
 {
-
     printf("%d ", data);
 
     return 0;    
 }
 
 /*============================================================================*/
-int is_match(int data, int arg)
+/*                                                                   is_match */
+/*                                                                   ~~~~~~~~ */
+int is_match(const int& data, const int& arg)
 {
     return (data < arg);
 }
