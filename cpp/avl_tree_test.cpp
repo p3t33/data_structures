@@ -67,10 +67,7 @@ static void unit_test_remove(void);
 static void unit_test_balancing(void);
 static void unit_test_find_all(void);
 static void unit_test_remove_all(void);
-static void unit_test_b(void);
-static void unit_test_c(void);
-static void unit_test_d(void);
-static void unit_test_e(void);
+
 
 /*                                                           Integration Test */ 
 /*                                                           ~~~~~~~~~~~~~~~~ */  
@@ -200,7 +197,6 @@ static void unit_test_remove(void)
 {
     std::cout << "=================== unit_test_remove ================"<< std::endl;    
    
-    int param = 5, i = 0;
     int arr[] = {5 ,10 , 3, 7, 19, 35, 4, 2, 1}; 
 
     AVL<int> tree(int_data_compare);
@@ -210,7 +206,7 @@ static void unit_test_remove(void)
     tree.remove(&arr[0]);
 
     /* inserting data to the tree */
-    for(i = 0; i < 9; ++i)
+    for(size_t i = 0; i < 9; ++i)
     {
         tree.insert(&arr[i]);
 
@@ -349,50 +345,6 @@ static void unit_test_remove_all(void)
 
     std::cout << "================================================"<< std::endl;
 }
-
-/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-/*                                                                  unit_test_b */
-/*                                                                  ~~~~~~~~~ */
-static void unit_test_b(void)
-{
-    std::cout << "=================== unit_test_b ================"<< std::endl;    
-    
-
-    std::cout << "================================================"<< std::endl;
-}
-
-/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-/*                                                                  unit_test_c */
-/*                                                                  ~~~~~~~~~ */
-static void unit_test_c(void)
-{
-    std::cout << "=================== unit_test_c ================"<< std::endl;   
-
-    std::cout << "================================================"<< std::endl;
-}
-
-/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-/*                                                                  unit_test_d */
-/*                                                                  ~~~~~~~~~ */
-static void unit_test_d(void)
-{
-    std::cout << "=================== unit_test_d ================"<< std::endl;    
-   
-
-    std::cout << "================================================"<< std::endl;
-}
-
-/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-/*                                                                  unit_test_e */
-/*                                                                  ~~~~~~~~~ */
-static void unit_test_e(void)
-{
-    std::cout << "=================== unit_test_e ================"<< std::endl;    
-    
-
-    std::cout << "================================================"<< std::endl;
-}
-
 
 
 /*============================================================================*/
