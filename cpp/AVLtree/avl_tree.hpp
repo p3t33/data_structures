@@ -9,7 +9,7 @@
 * #Version: V 1.0
 * Writer: Kobi Medrish       
 * Created: 4.11.19
-* Last update: 3.11.19
+* Last update: 7.11.19
 *******************************************************************************/
 #include <stddef.h> // size_t
 #include <functional> // using
@@ -20,7 +20,98 @@ namespace med
 {
 
 template <typename T>
-class AVL_node
+class AVL
+{
+    private:
+        using compare_t = std::function<int(const T& data1, const T& data2)>;
+        using action_func_t = std::function<int(const T& data)>;
+        using is_match_t = std::function<int(const T& data, const T& arg)>;
+
+        enum children {LEFT, RIGHT};
+
+        static const int success = 0, zero = 0;
+
+        class AVL_node; // auxiliary class to hold data
+
+    public:
+
+        AVL(compare_t CompareFunc);
+        ~AVL();
+
+        // Interface / API
+        // ------------------------------------------------------------------
+        int insert(T* data);
+        void remove(T* data);
+        T* find(const T* data);
+        size_t count();
+        int is_empty();
+        size_t height();
+        int for_each(action_func_t action_func);
+        int find_all(is_match_t is_match, T* arg);
+        void remove_all(is_match_t is_match, T* arg);
+
+        std::vector<T*>& get_vector();
+        // ------------------------------------------------------------------
+
+    private:
+        // Auxilary recursive functions
+        // ------------------------------------------------------------------
+        void destroy_recursive(AVL_node* node); // destory 
+        size_t count_recursive(AVL_node* node); // count
+
+        // for_each
+        int for_each_recursive(AVL_node* node,
+                               action_func_t action_func); 
+        
+        // remove
+        AVL_node *remove_recursive(AVL_node* node, T* data); 
+        AVL_node *remove_node(AVL_node* node);
+
+        // insert 
+        AVL_node* insert_recursive(AVL_node* node, T* data); 
+        T* find_recursive(AVL_node* node, const T* data); // find 
+
+        // find_all
+        int find_all_rec(AVL_node* node, is_match_t is_match, T* arg);
+
+        // remove_all
+        int remove_all_rec(AVL_node* node, is_match_t is_match, T* arg);
+        // ------------------------------------------------------------------
+
+        // Auxiliary general functions
+        // ------------------------------------------------------------------
+        int max_hight(size_t& first_num, size_t& second_num);
+
+        void destroy_node(AVL_node* node);
+        int has_only_one_child(AVL_node* node);
+        int find_only_child_path(AVL_node* node);
+        int is_leaf(AVL_node* node);
+        AVL_node* node_next(AVL_node* node);
+        void height_of_nodes_children(AVL_node* node,
+                                      size_t* left,
+                                      size_t* right);
+        // -----------------------------------------------------------------
+
+        // Balancing functions
+        // ------------------------------------------------------------------
+        void update_node_hight(AVL_node *node);
+        AVL_node *rotate_left(AVL_node *node);
+        AVL_node *rotate_right(AVL_node *node);
+        AVL_node *rebalance_node(AVL_node *node);
+        int node_balance_factor(AVL_node* node);
+        // ------------------------------------------------------------------
+
+
+        // managing variables 
+        // ------------------
+        AVL<T>::AVL_node* m_root;
+        compare_t m_CompareFunc;
+        std::vector<T*> m_find_all; // used for find_all
+};
+
+
+template <typename T>
+class AVL<T>::AVL_node
 {
     private:
         enum children {LEFT, RIGHT};
@@ -46,97 +137,6 @@ class AVL_node
         T* m_data;
         size_t m_height;
         struct AVL_node* m_children[2];
-};
-
-
-template <typename T>
-class AVL
-{
-    private:
-        using compare_t = std::function<int(const T& data1, const T& data2)>;
-        using action_func_t = std::function<int(const T& data)>;
-        using is_match_t = std::function<int(const T& data, const T& arg)>;
-
-        enum children {LEFT, RIGHT};
-
-        static const int success = 0;
-        static const int zero = 0;
-
-    public:
-        AVL(compare_t CompareFunc);
-        ~AVL();
-
-        // Interface / API
-        // ------------------------------------------------------------------
-        int insert(T* data);
-        void remove(T* data);
-        T* find(const T* data);
-        size_t count();
-        int is_empty();
-        size_t height();
-        int for_each(action_func_t action_func);
-        int find_all(is_match_t is_match, T* arg);
-        void remove_all(is_match_t is_match, T* arg);
-
-        std::vector<T*>& get_vector();
-        // ------------------------------------------------------------------
-
-    private:
-        // Auxilary recursive functions
-        // ------------------------------------------------------------------
-        void destroy_recursive(AVL_node<T>* node); // destory 
-        size_t count_recursive(AVL_node<T>* node); // count
-
-        // for_each
-        int for_each_recursive(AVL_node<T>* node, action_func_t action_func); 
-        
-        // remove
-        AVL_node<T> *remove_recursive(AVL_node<T>* node, T* data); 
-        AVL_node<T> *remove_node(AVL_node<T>* node);
-
-        AVL_node<T>* insert_recursive(AVL_node<T>* node, T* data); // insert 
-        T* find_recursive(AVL_node<T>* node, const T* data); // find 
-
-        // find_all
-        int find_all_rec(AVL_node<T>* node, is_match_t is_match, T* arg);
-
-        // remove_all
-        int remove_all_rec(AVL_node<T>* node, is_match_t is_match, T* arg);
-        // ------------------------------------------------------------------
-
-        // Auxiliary general functions
-        // ------------------------------------------------------------------
-        //TODO: where to implement and what about dereference of &
-        inline int max_hight(size_t& first_num, size_t& second_num)
-        {
-            return (((first_num > second_num) ? first_num : second_num) + 1);    
-        }
-
-        void destroy_node(AVL_node<T>* node); // done
-        int has_only_one_child(AVL_node<T>* node); // done
-        int find_only_child_path(AVL_node<T>* node); // done
-        int is_leaf(AVL_node<T>* node); // done
-        AVL_node<T>* node_next(AVL_node<T>* node); // done
-        void height_of_nodes_children(AVL_node<T>* node,
-                                      size_t* left,
-                                      size_t* right); // done
-        // -----------------------------------------------------------------
-
-        // Balancing functions
-        // ------------------------------------------------------------------
-        void update_node_hight(AVL_node<T> *node);
-        AVL_node<T> *rotate_left(AVL_node<T> *node);
-        AVL_node<T> *rotate_right(AVL_node<T> *node);
-        AVL_node<T> *rebalance_node(AVL_node<T> *node);
-        int node_balance_factor(AVL_node<T>* node);
-        // ------------------------------------------------------------------
-
-
-        // managing variables 
-        // ------------------
-        AVL_node<T>* m_root;
-        compare_t m_CompareFunc;
-        std::vector<T*> m_find_all; // used for find_all
 };
 
 /*============================================================================*/
@@ -167,7 +167,7 @@ AVL<T>::~AVL()
 /*                                                          destroy_recursive */
 /*                                                          ~~~~~~~~~~~~~~~~~ */
 template <typename T>
-void AVL<T>::destroy_recursive(AVL_node<T>* node)
+void AVL<T>::destroy_recursive( AVL<T>::AVL_node* node)
 {
     if (nullptr == node)
     {
@@ -183,7 +183,7 @@ void AVL<T>::destroy_recursive(AVL_node<T>* node)
 /*                                                               destroy_node */
 /*                                                               ~~~~~~~~~~~~ */
 template <typename T>
-void AVL<T>::destroy_node(AVL_node<T>* node)
+void AVL<T>::destroy_node( AVL<T>::AVL_node* node)
 {
 
     //TODO: exception
@@ -214,7 +214,7 @@ size_t AVL<T>::count()
 /*                                                            count_recursive */
 /*                                                            ~~~~~~~~~~~~~~~ */
 template <typename T>
-size_t AVL<T>::count_recursive(AVL_node<T>* node)
+size_t AVL<T>::count_recursive( AVL<T>::AVL_node* node)
 {
     if (nullptr == node)
     {
@@ -260,7 +260,7 @@ int AVL<T>::insert(T* data)
     if (true == is_empty())
     {
         // TODO: exception
-        m_root = new AVL_node<T>(data);
+        m_root = new  AVL<T>::AVL_node(data);
     }
     else
     {
@@ -276,7 +276,7 @@ int AVL<T>::insert(T* data)
 /*                                                           insert_recursive */
 /*                                                           ~~~~~~~~~~~~~~~~ */
 template <typename T>
-AVL_node<T>* AVL<T>::insert_recursive(AVL_node<T>* node, T* data)
+typename AVL<T>::AVL_node* AVL<T>::insert_recursive( AVL<T>::AVL_node* node, T* data)
 {
     int path = 0, difference = 0;
 
@@ -295,7 +295,7 @@ AVL_node<T>* AVL<T>::insert_recursive(AVL_node<T>* node, T* data)
 
     if (nullptr == node->m_children[path])
     {
-        node->m_children[path] = new AVL_node<T>(data);
+        node->m_children[path] = new  AVL<T>::AVL_node(data);
     }
     else
     {
@@ -323,7 +323,7 @@ int AVL<T>::for_each(action_func_t action_func)
 /*                                                         for_each_recursive */
 /*                                                         ~~~~~~~~~~~~~~~~~~ */
 template <typename T>
-int AVL<T>::for_each_recursive(AVL_node<T>* node, action_func_t action_func)
+int AVL<T>::for_each_recursive( AVL<T>::AVL_node* node, action_func_t action_func)
 {
     if (nullptr != node)
     {
@@ -358,7 +358,7 @@ T* AVL<T>::find(const T* data)
 /*                                                             find_recursive */
 /*                                                             ~~~~~~~~~~~~~~ */
 template <typename T>
-T* AVL<T>::find_recursive(AVL_node<T>* node, const T* data)
+T* AVL<T>::find_recursive( AVL<T>::AVL_node* node, const T* data)
 {
     int path = 0, deffrance = 0;
 
@@ -406,7 +406,7 @@ void AVL<T>::remove(T* data)
 /*                                                           remove_recursive */
 /*                                                           ~~~~~~~~~~~~~~~~ */
 template <typename T>
-AVL_node<T>* AVL<T>::remove_recursive(AVL_node<T>* node, T* data)
+typename AVL<T>::AVL_node* AVL<T>::remove_recursive( AVL<T>::AVL_node* node, T* data)
 {
     int path = 0, deffrance = 0;
 
@@ -456,7 +456,7 @@ void AVL<T>::remove_all(is_match_t is_match, T* arg)
 /*                                                             remove_all_rec */
 /*                                                             ~~~~~~~~~~~~~~ */
 template <typename T>
-int AVL<T>::remove_all_rec(AVL_node<T>* node, is_match_t is_match, T* arg)
+int AVL<T>::remove_all_rec( AVL<T>::AVL_node* node, is_match_t is_match, T* arg)
 {
 
     if (nullptr != node)
@@ -475,10 +475,10 @@ int AVL<T>::remove_all_rec(AVL_node<T>* node, is_match_t is_match, T* arg)
 /*                                                                remove_node */
 /*                                                                ~~~~~~~~~~~ */
 template <typename T>
-AVL_node<T>* AVL<T>::remove_node(AVL_node<T>* node)
+typename AVL<T>::AVL_node* AVL<T>::remove_node( AVL<T>::AVL_node* node)
 {
     //int path = 0;
-    AVL_node<T>* disposable_node = nullptr;
+     AVL<T>::AVL_node* disposable_node = nullptr;
 
     /* in case there is no children */
     if (true == is_leaf(node))
@@ -533,7 +533,7 @@ int AVL<T>::find_all(is_match_t is_match, T *arg)
 /*                                                               find_all_rec */
 /*                                                               ~~~~~~~~~~~~ */
 template <typename T>
-int AVL<T>::find_all_rec(AVL_node<T>* node, is_match_t is_match, T* arg)
+int AVL<T>::find_all_rec( AVL<T>::AVL_node* node, is_match_t is_match, T* arg)
 {
     if (nullptr != node)
     {
@@ -565,7 +565,7 @@ std::vector<T*>& AVL<T>::get_vector()
 /*                                                          update_node_hight */
 /*                                                          ~~~~~~~~~~~~~~~~~ */
 template <typename T>
-void AVL<T>::update_node_hight(AVL_node<T> *node)
+void AVL<T>::update_node_hight( AVL<T>::AVL_node *node)
 {
     size_t left_child_height = 0;
     size_t right_child_height = 0;
@@ -586,12 +586,12 @@ void AVL<T>::update_node_hight(AVL_node<T> *node)
 /*                                                                rotate_left */
 /*                                                                ~~~~~~~~~~~ */
 template <typename T>
-AVL_node<T>* AVL<T>::rotate_left(AVL_node<T> *node)
+typename AVL<T>::AVL_node* AVL<T>::rotate_left(AVL<T>::AVL_node *node)
 {
     /* node is the unbalanced node */
 
     /* pivot node for rotation right */
-    AVL_node<T>* pivot_node = nullptr;
+     AVL<T>::AVL_node* pivot_node = nullptr;
     assert(node);
     pivot_node = node->m_children[RIGHT];
 
@@ -613,12 +613,12 @@ AVL_node<T>* AVL<T>::rotate_left(AVL_node<T> *node)
 /*                                                               rotate_right */
 /*                                                               ~~~~~~~~~~~~ */
 template <typename T>
-AVL_node<T>* AVL<T>::rotate_right(AVL_node<T> *node)
+typename AVL<T>::AVL_node* AVL<T>::rotate_right( AVL<T>::AVL_node *node)
 {
     /* node is the unbalanced node */
 
     /* pivot node for rotation right */
-    AVL_node<T>* pivot_node = nullptr;
+     AVL<T>::AVL_node* pivot_node = nullptr;
     assert(node);
 
     pivot_node = node->m_children[LEFT];
@@ -641,7 +641,7 @@ AVL_node<T>* AVL<T>::rotate_right(AVL_node<T> *node)
 /*                                                             rebalance_node */
 /*                                                             ~~~~~~~~~~~~~~ */
 template <typename T>
-AVL_node<T>* AVL<T>::rebalance_node(AVL_node<T> *node)
+typename AVL<T>::AVL_node* AVL<T>::rebalance_node( AVL<T>::AVL_node *node)
 {
     assert(node);
 
@@ -733,7 +733,7 @@ AVL_node<T>* AVL<T>::rebalance_node(AVL_node<T> *node)
 /*                                                        node_balance_factor */
 /*                                                        ~~~~~~~~~~~~~~~~~~~ */
 template <typename T>
-int AVL<T>::node_balance_factor(AVL_node<T>* node)
+int AVL<T>::node_balance_factor( AVL<T>::AVL_node* node)
 {
     size_t right_child_height = 0;
 	size_t left_child_height = 0;
@@ -762,7 +762,7 @@ int AVL<T>::node_balance_factor(AVL_node<T>* node)
 /*                                                   height_of_nodes_children */
 /*                                                   ~~~~~~~~~~~~~~~~~~~~~~~~ */
 template <typename T>
-void AVL<T>::height_of_nodes_children(AVL_node<T>* node,
+void AVL<T>::height_of_nodes_children( AVL<T>::AVL_node* node,
                                       size_t* left,
                                       size_t* right)
 {
@@ -790,7 +790,7 @@ void AVL<T>::height_of_nodes_children(AVL_node<T>* node,
 /*                                                         has_only_one_child */
 /*                                                         ~~~~~~~~~~~~~~~~~~ */
 template <typename T>
-int AVL<T>::has_only_one_child(AVL_node<T>* node)
+int AVL<T>::has_only_one_child( AVL<T>::AVL_node* node)
 {
     assert(node);
     return ((nullptr == node->m_children[LEFT] || 
@@ -801,7 +801,7 @@ int AVL<T>::has_only_one_child(AVL_node<T>* node)
 /*                                                       find_only_child_path */
 /*                                                       ~~~~~~~~~~~~~~~~~~~~ */
 template <typename T>
-int AVL<T>::find_only_child_path(AVL_node<T>* node)
+int AVL<T>::find_only_child_path( AVL<T>::AVL_node* node)
 {
     assert(node);
     return (nullptr == node->m_children[LEFT]);
@@ -811,7 +811,7 @@ int AVL<T>::find_only_child_path(AVL_node<T>* node)
 /*                                                                    is_leaf */
 /*                                                                    ~~~~~~~ */
 template <typename T>
-int AVL<T>::is_leaf(AVL_node<T>* node)
+int AVL<T>::is_leaf( AVL<T>::AVL_node* node)
 {
     assert(node);
     return (nullptr == node->m_children[LEFT] && 
@@ -822,7 +822,7 @@ int AVL<T>::is_leaf(AVL_node<T>* node)
 /*                                                                  node_next */
 /*                                                                  ~~~~~~~~~ */
 template <typename T>
-AVL_node<T>* AVL<T>::node_next(AVL_node<T>* node)
+typename AVL<T>::AVL_node* AVL<T>::node_next( AVL<T>::AVL_node* node)
 {
     assert(node);
     if (nullptr == node->m_children[LEFT])
@@ -833,5 +833,13 @@ AVL_node<T>* AVL<T>::node_next(AVL_node<T>* node)
     return (node_next(node->m_children[LEFT]));
 }
 
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*                                                                  max_hight */
+/*                                                                  ~~~~~~~~~ */
+template <typename T>
+inline int AVL<T>::max_hight(size_t& first_num, size_t& second_num)
+{
+    return (((first_num > second_num) ? first_num : second_num) + 1);
+}
 } // namespace hrd9
 #endif // _AVL_TREE_
