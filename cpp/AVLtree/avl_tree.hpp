@@ -8,7 +8,7 @@
 * #Version: V 1.0
 * Writer: Kobi Medrish       
 * Created: 4.11.19
-* Last update: 7.11.19
+* Last update: 8.11.19
 *******************************************************************************/
 
 /*============================================================================*/
@@ -60,7 +60,6 @@ class AVL
         void remove_all(is_match_t is_match, T* arg);
 
         std::vector<T*>& get_vector();
-        // ------------------------------------------------------------------
 
     private:
         // Auxilary recursive functions
@@ -84,7 +83,6 @@ class AVL
 
         // remove_all
         int remove_all_rec(node_ptr node, is_match_t is_match, T* arg);
-        // ------------------------------------------------------------------
 
         // Auxiliary general functions
         // ------------------------------------------------------------------
@@ -97,7 +95,6 @@ class AVL
         void height_of_nodes_children(node_ptr node,
                                       size_t* left,
                                       size_t* right);
-        // -----------------------------------------------------------------
 
         // Balancing functions
         // ------------------------------------------------------------------
@@ -106,8 +103,6 @@ class AVL
         node_ptr rotate_right(node_ptr node);
         node_ptr rebalance_node(node_ptr node);
         int node_balance_factor(node_ptr node);
-        // ------------------------------------------------------------------
-
 
         // managing variables 
         // ------------------
