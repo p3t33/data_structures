@@ -42,11 +42,9 @@ class AVL
 
         static const int success = 0, zero = 0;
 
-
     public:
-
         AVL(compare_t CompareFunc);
-        // no need to define a dtor, all allocated resources are taken care
+        // no need to define a dtor, all allocated resources are taken care of
         // by std::shared_ptr
 
         // Interface / API
