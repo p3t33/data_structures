@@ -27,10 +27,11 @@
 /*============================================================================*/
 /*                                                                     Macros */
 /*                                                                     ~~~~~~ */
-#define MALLOC_FAIL (NULL)
-#define STACK_IS_FULL (1)
+#define MALLOC_FAIL NULL
+#define STACK_IS_FULL 1
 #define TRUE 1
 #define FALSE 0
+#define BEGINNING_OF_STACK NULL
 
 /*============================================================================*/
 /*                                                                    structs */
@@ -38,7 +39,7 @@
 typedef struct node
 {
 	void *data;
-	node_t *prev;
+	struct node *prev;
 }node_t;
 
 struct stack
@@ -52,7 +53,7 @@ struct stack
 /*============================================================================*/
 /*                                                                StackCreate */
 /*                                                                ~~~~~~~~~~~ */
-stack_t *StackCreate(size_t element_size, size_t capacity)
+stack_t *StackCreate()
 {
     /* A pointer to managing struct and stack storage is created */
 	stack_t* stack_ptr = (stack_t*)malloc(sizeof(stack_t));
@@ -60,6 +61,8 @@ stack_t *StackCreate(size_t element_size, size_t capacity)
 	{
 		return (MALLOC_FAIL);
 	}
+
+	stack_ptr->head = NULL;
 
 	return (stack_ptr);
 }
@@ -69,13 +72,18 @@ stack_t *StackCreate(size_t element_size, size_t capacity)
 /*                                                               ~~~~~~~~~~~~ */
 void StackDestroy(stack_t *stack_ptr)
 {
-	while(NULL != stack_ptr)
+	assert (stack_ptr);
+	
+	while(BEGINNING_OF_STACK != stack_ptr->head)
 	{
-		node_t *temp = stack_ptr;
+		node_t * temp = stack_ptr->head;
 		stack_ptr->head = stack_ptr->head->prev;
 		free(temp);
 		temp = NULL;
 	}
+
+	free (stack_ptr);
+	stack_ptr = NULL;
 }
 
 /*============================================================================*/
@@ -90,14 +98,14 @@ int StackPush(stack_t *stack_ptr, const void *element)
 	{
 		stack_ptr->head = (node_t*)malloc(sizeof(node_t));
 		stack_ptr->head->prev = NULL;
-		stack_ptr->head->data = element;
+		stack_ptr->head->data = (void*)element;
 
 		return (0);
 	}
 
 	node_t *temp = (node_t*)malloc(sizeof(node_t));
 	temp->prev = stack_ptr->head;
-	temp->data = element;
+	temp->data = (void*)element;
 	stack_ptr->head = temp;
 
 	return (0);	

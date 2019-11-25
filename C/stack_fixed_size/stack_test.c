@@ -3,10 +3,10 @@
 *                       ========================
 * File Name: stack_test.c
 * Related files: stack.h stack.c
-* #Version: V 1.0
+* #Version: V 1.1
 * Writer: Kobi Medrish       
 * Created: 14.9.19
-* Last update: 16.9.19
+* Last update: 25.11.19
 *******************************************************************************/
 
 /*============================================================================*/
@@ -138,11 +138,11 @@ static void UnitTestStackPush(void)
 
 	if (STACK_CAPACITY == StackSize(stack_handle))
 	{
-		printf("StackSize on empty stack :" GREEN "SUCCESS\n" RESET);
+		printf("StackSize on stack :" GREEN "SUCCESS\n" RESET);
 	}
 	else
 	{
-		printf("StackSize on empty stack:" RED "FAILURE\n" RESET);
+		printf("StackSize on stack:" RED "FAILURE\n" RESET);
 	}
 	
 	if (0 == StackIsEmpty(stack_handle))

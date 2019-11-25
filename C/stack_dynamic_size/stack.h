@@ -23,7 +23,7 @@ typedef struct stack stack_t;
  */
 
 
-stack_t *StackCreate(size_t element_size, size_t capacity);
+stack_t *StackCreate();
  /* 
   * Creates a generic stack with specified capacity and element size
   *  
