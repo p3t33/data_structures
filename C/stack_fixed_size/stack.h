@@ -5,10 +5,10 @@
 *              =====================
 * File Name: stack.h
 * Related files: stack.c stack_test.c
-* #Version: V 1.0
+* #Version: V 1.1
 * Writer: Kobi Medrish       
 * Created: 14.9.19
-* Last update: 14.9.19
+* Last update: 25.11.19
 *******************************************************************************/
 
 #include <stddef.h> /* size_t */
@@ -19,7 +19,8 @@ typedef struct stack stack_t;
  * with two principal operations: push, which adds an element to the collection,
  * and pop, which removes the most recently added element that was not yet 
  * removed. The order in which elements come off a stack gives rise to its 
- * alternative name, LIFO (last in, first out).
+ * alternative name, LIFO (last in, first out). This implementation is based on
+ * a fixed size stack.
  */
 
 
