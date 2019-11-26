@@ -1,101 +1,155 @@
-#include <stddef.h> /* size_t */
-#include <stdint.h> /* uint64_t */
-#include <assert.h>
+/*******************************************************************************
+*                                 bit array
+*                           =====================
+* File Name: bit_array.c
+* Related files: bit_array_test.h stack_test.h prep_lut.h
+* #Version: V 1.1
+* Writer: Kobi Medrish       
+* Created: 26.10.19
+* Last update: 26.11.19
+*******************************************************************************/
 
-#include "bit_array.h" /* Used to include custom functions */
+
+/*============================================================================*/
+/*                                  Definitions                               */
+/*============================================================================*/
+/*                                                      standard  directories */
+/*                                                      ~~~~~~~~~~~~~~~~~~~~~ */
+#include <stdio.h> /* used for printf */
+
+/*============================================================================*/
+/*                                                          local directories */
+/*                                                          ~~~~~~~~~~~~~~~~~ */
+#include "bit_array.h"
 #include "prep_lut.h" /* Used to include improved Nirror and count functions */
 
+/*============================================================================*/
+/*                                                                     Macros */
+/*                                                                     ~~~~~~ */
 #define WORDSIZE 64
-
-/*###################### turn on/ off all bits in <bit_array> #####################*/
-void AllOn(uint64_t *bit_array)
+ 
+/*============================================================================*/
+/*                               API functions                                */
+/*============================================================================*/
+/*                                                                      AllOn */
+/*                                                                      ~~~~~ */
+uint64_t AllOn(uint64_t bit_array)
 {
     uint64_t all_bits_on = ~ 0;
-
-    assert(bit_array);
     
-    *bit_array |= all_bits_on;
+    bit_array = bit_array | all_bits_on;
+    
+    return bit_array;   
 }
 
-void AllOff(uint64_t *bit_array)
+/*============================================================================*/
+/*                                                                     AllOff */
+/*                                                                     ~~~~~~ */
+uint64_t AllOff(uint64_t bit_array)
 {
     uint64_t all_bits_off = 0;
-
-    assert (bit_array);
-
-    *bit_array &= all_bits_off;
+    
+    bit_array = bit_array & all_bits_off;
+    
+    return bit_array;
 }
 
-/*##################### set on/off bit <#index> in <bit_array> ####################*/
-void SetOn(uint64_t *bit_array, size_t index)
+/*============================================================================*/
+/*                                                                      SetOn */
+/*                                                                      ~~~~~ */
+uint64_t SetOn(uint64_t bit_array, size_t index)
 {
-    uint64_t bit_index = 1;
+    uint64_t temp_bit_index = 1;
     
-    assert (bit_array);
-
-    bit_index <<= index;
-
-    *bit_array |= bit_index;       
+    temp_bit_index <<= index;
+    
+    bit_array = bit_array | temp_bit_index;
+    
+    return bit_array;        
 }
 
-void SetOff(uint64_t *bit_array, size_t index)
+/*============================================================================*/
+/*                                                                     SetOff */
+/*                                                                     ~~~~~~ */
+uint64_t SetOff(uint64_t bit_array, size_t index)
 {
-    uint64_t bit_index = 1;
+    uint64_t temp_bit_index = 1;
     
-    assert (bit_array);
-
-    bit_index <<= index;
-    bit_index = ~bit_index;
+    temp_bit_index <<= index;
+    temp_bit_index = ~temp_bit_index;
     
-    *bit_array &= bit_index;  
+    bit_array = bit_array & temp_bit_index;  
+    
+    return bit_array;     
 }
 
-void SetBit(uint64_t *bit_array, size_t index, char value)
+/*============================================================================*/
+/*                                                                     SetBit */
+/*                                                                     ~~~~~~ */
+uint64_t SetBit(uint64_t bit_array, size_t index, char value)
 {
-    (value) ? SetOn(bit_array, index) : SetOff(bit_array,index);
+    return((value) ? SetOn(bit_array,index) : SetOff(bit_array,index)); 
 }
 
-bool_t IsOn(uint64_t *bit_array, size_t index)
+/*============================================================================*/
+/*                                                                       IsOn */
+/*                                                                       ~~~~ */
+bool_t IsOn(uint64_t bit_array, size_t index)
 {
-    uint64_t bit_index = 1;
+    uint64_t temp_bit_index = 1;
     
-    bit_index <<= index;
+    temp_bit_index <<= index;
     
-    return((*bit_array & bit_index) ? TRUE : FALSE);
+    return((bit_array & temp_bit_index) ? TRUE : FALSE);
 }
 
-bool_t IsOff(uint64_t *bit_array, size_t index)
+/*============================================================================*/
+/*                                                                      IsOff */
+/*                                                                      ~~~~~ */
+bool_t IsOff(uint64_t bit_array, size_t index)
 {
-    uint64_t bit_index = 1;
+    uint64_t temp_bit_index = 1;
     
-    bit_index <<= index;
+    temp_bit_index <<= index;
     
-    return((*bit_array & bit_index) ? FALSE : TRUE); 
+    return((bit_array & temp_bit_index) ? FALSE : TRUE); 
         
 }
 
-void FlipBit(uint64_t *bit_array, size_t index)
+/*============================================================================*/
+/*                                                                    FlipBit */
+/*                                                                    ~~~~~~~ */
+uint64_t FlipBit(uint64_t bit_array, size_t index)
 {
-    uint64_t bit_index = 1;
+    uint64_t temp_bit_index = 1;
     
-    bit_index <<= index;
+    temp_bit_index <<= index;
     
-    *bit_array ^= bit_index;
+    bit_array = bit_array ^ temp_bit_index;
+    
+    return (bit_array);
 }
 
-void RotateLeft(uint64_t *bit_array, size_t offset)
+/*============================================================================*/
+/*                                                                 RotateLeft */
+/*                                                                 ~~~~~~~~~~ */
+uint64_t RotateLeft(uint64_t bit_array, size_t offset)
 {
-    *bit_array <<= offset;
-
-    (bit_array << offset)|(bit_array >> ((WORDSIZE - offset)));
+    return((bit_array << offset)|(bit_array >> ((WORDSIZE - offset))));
 }
 
-void RotateRight(uint64_t *bit_array, size_t offset)
+/*============================================================================*/
+/*                                                                RotateRight */
+/*                                                                ~~~~~~~~~~~ */
+uint64_t RotateRight(uint64_t bit_array, size_t offset)
 {
     return((bit_array >> offset)|(bit_array << ((WORDSIZE - offset)))); 
 }
 
-void Mirror(uint64_t *bit_array)
+/*============================================================================*/
+/*                                                                     Mirror */
+/*                                                                     ~~~~~~ */
+uint64_t Mirror(uint64_t bit_array)
 {
     unsigned int count = WORDSIZE;
     uint64_t out_number = 0;
@@ -118,9 +172,12 @@ void Mirror(uint64_t *bit_array)
     return out_number;
 }
 
+/*============================================================================*/
+/*                                                                    CountOn */
+/*                                                                    ~~~~~~~ */
 size_t CountOn(uint64_t bit_array)
 { 
-    size_t bit_counter = 0;
+    unsigned int bit_counter = 0;
   
     while (bit_array)
     {
@@ -131,9 +188,12 @@ size_t CountOn(uint64_t bit_array)
     return bit_counter;
 }
 
+/*============================================================================*/
+/*                                                                   CountOff */
+/*                                                                   ~~~~~~~~ */
 size_t CountOff(uint64_t bit_array)
 {
-    size_t int bit_counter = 0;
+    unsigned int bit_counter = 0;
     bit_array = ~bit_array;
   
     while (bit_array)
@@ -145,6 +205,10 @@ size_t CountOff(uint64_t bit_array)
     return bit_counter;
 }
 
+
+/*============================================================================*/
+/*                                                                CountBitLut */
+/*                                                                ~~~~~~~~~~~ */
 size_t CountBitLut(uint64_t bit_array)
 {
     unsigned char temp_one_byte = 0;
@@ -162,6 +226,9 @@ size_t CountBitLut(uint64_t bit_array)
     return (set_bit_counter); 
 }
 
+/*============================================================================*/
+/*                                                               MirrorBitLut */
+/*                                                               ~~~~~~~~~~~~ */
 uint64_t MirrorBitLut(uint64_t bit_array)
 {
     unsigned char temp_one_byte = 0;
@@ -180,6 +247,3 @@ uint64_t MirrorBitLut(uint64_t bit_array)
     
     return(mirrored_number);       
 }
-
-
-
