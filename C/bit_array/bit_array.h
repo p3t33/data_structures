@@ -11,6 +11,16 @@
 * Last update: 26.11.19
 *******************************************************************************/
 
+/*
+ * A bit array (also known as bit map, bit set, bit string, or bit vector) is
+ * an array data structure that compactly stores bits. In this implementation
+ * I used a single uint64_t variable which represents an array of 64 bits.
+ * 
+ * As an extention, API functions CountBitLut and MirrorBitLut use a lut to
+ * do the same calculations done by API functions CountOn and Mirror. the LUT
+ * is prepared by running the binary compiled from auxiliary file
+ * prep_lut.c 
+ */
 
 /*============================================================================*/
 /*                                  Definitions                               */

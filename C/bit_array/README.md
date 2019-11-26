@@ -1,23 +1,14 @@
-# Data structures
+### Getting Started
 
-This repository contains several implementations (in c and c++) of common data structures, each one has a folder and an API. All data structures were tested and preform as expected to the best of my knowledge, if you encounter a bug please let me know. 
+This bit array implementation is extended by using a LUT file for API functions
+CountBitLut and MirrorBitLut to do the same calculations done by API functions
+CountOn and Mirror.
+After running the binary compiled from auxiliary prep_lut.c file, a lut.h file
+will be created.  lut.h is part of the included list in bit_array.c file.
+bit_array.c won't compile without existence of lut.h, so it is important to
+create it first.
 
-All stable and tested code is located on the master branch and all unfinished / untested code is located on the development branch.
-
-## Compilers and operating system
-* Development was on ubuntu 18.04 LTS OS.
-* Source code was compiled with:
-    - for C - GNU gcc (v7.4) and clang (v6.0), std=99
-    - for C++ - GNU g++ (v7.4) and clang++ (v6.0), std=11
-* Tested for memory leaks using Valgrind v3.13.0
-  
-
-## Getting Started
-
-1. Clone the repository by typing in the command line:
+The simplest way to do all of this is by running the provided script:
+```bash
+    ./compile_and_run.sh
 ```
-  git clone https://github.com/p3t33/data_structures.git
-```
-
-
-

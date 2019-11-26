@@ -21,7 +21,8 @@
 /*                                                          local directories */
 /*                                                          ~~~~~~~~~~~~~~~~~ */
 #include "bit_array.h"
-#include "prep_lut.h" /* Used to include improved Nirror and count functions */
+#include "lut.h" /* Used by MirrorBitLut and CountBitLut functions */
+
 
 /*============================================================================*/
 /*                                                                     Macros */
@@ -113,7 +114,6 @@ bool_t IsOff(uint64_t bit_array, size_t index)
     temp_bit_index <<= index;
     
     return((bit_array & temp_bit_index) ? FALSE : TRUE); 
-        
 }
 
 /*============================================================================*/

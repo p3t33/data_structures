@@ -11,9 +11,6 @@
 * Last update: 25.11.19
 *******************************************************************************/
 
-#include <stddef.h> /* size_t */
-typedef struct stack stack_t;
-
 /* 
  * Stack is an abstract data structure that serves as a collection of elements,
  * with two principal operations: push, which adds an element to the collection,
@@ -23,6 +20,8 @@ typedef struct stack stack_t;
  * a fixed size stack.
  */
 
+#include <stddef.h> /* size_t */
+typedef struct stack stack_t;
 
 stack_t *StackCreate(size_t element_size, size_t capacity);
  /* 

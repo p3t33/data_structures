@@ -66,7 +66,7 @@ int CreateLutFile(void)
                                
     FILE *file_pointer = 0;
     
-    file_pointer = fopen("prep_lut.h","w");
+    file_pointer = fopen("lut.h","w");
     if (FAILED_TO_OPEN_FILE == file_pointer)
     {
         return (failed_to_open_file);
