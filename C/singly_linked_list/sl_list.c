@@ -77,7 +77,7 @@ sl_node_t *SLLCreate(void *data, sl_node_t *next)
     return (node);
 }
 
-/*============================================================================*/
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*                                                                 SLLDestroy */
 /*                                                                 ~~~~~~~~~~ */
 void SLLDestroy(sl_node_t *node)
@@ -92,7 +92,7 @@ void SLLDestroy(sl_node_t *node)
     }
 }
 
-/*============================================================================*/
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*                                                                  SLLInsert */
 /*                                                                  ~~~~~~~~~ */
 sl_node_t *SLLInsert(sl_node_t *node_to_insert, sl_node_t *node_location)
@@ -109,7 +109,7 @@ sl_node_t *SLLInsert(sl_node_t *node_to_insert, sl_node_t *node_location)
     return (node_location);
 }
 
-/*============================================================================*/
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*                                                             SLLInsertAfter */
 /*                                                             ~~~~~~~~~~~~~~ */
 sl_node_t *SLLInsertAfter(sl_node_t *node_to_insert, sl_node_t *node_location)
@@ -124,7 +124,7 @@ sl_node_t *SLLInsertAfter(sl_node_t *node_to_insert, sl_node_t *node_location)
     return(node_to_insert);
 }
 
-/*============================================================================*/
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*                                                                  SLLRemove */
 /*                                                                  ~~~~~~~~~ */
 sl_node_t *SLLRemove(sl_node_t *node_to_remove)
@@ -159,7 +159,7 @@ void SwapData(sl_node_t *node_one, sl_node_t *node_two)
     node_two->data = temp;
 }
 
-/*============================================================================*/
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*                                                             SLLRemoveAfter */
 /*                                                             ~~~~~~~~~~~~~~ */
 sl_node_t *SLLRemoveAfter(sl_node_t *location)
@@ -183,7 +183,7 @@ sl_node_t *SLLRemoveAfter(sl_node_t *location)
     return (removed_node);
 }
 
-/*============================================================================*/
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*                                                                 SLLForEach */
 /*                                                                 ~~~~~~~~~~ */
 int SLLForEach(sl_node_t *node, action_function_t func, void *param)
@@ -206,7 +206,7 @@ int SLLForEach(sl_node_t *node, action_function_t func, void *param)
     return (SUCCESS);
 }
 
-/*============================================================================*/
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*                                                                    SLLFind */
 /*                                                                    ~~~~~~~ */
 
@@ -231,7 +231,7 @@ sl_node_t *SLLFind(sl_node_t *node, is_match_function_t func, void *param)
     return(NO_MATCH);
 }
 
-/*============================================================================*/
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*                                                                   SLLCount */
 /*                                                                   ~~~~~~~~ */
 size_t SLLCount(const sl_node_t *node)
@@ -249,7 +249,7 @@ size_t SLLCount(const sl_node_t *node)
     return(node_counter);
 }
 
-/*============================================================================*/
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*                                                                    SLLFlip */
 /*                                                                    ~~~~~~~ */
 sl_node_t *SLLFlip(sl_node_t *node)
@@ -274,7 +274,7 @@ sl_node_t *SLLFlip(sl_node_t *node)
     return (node);
 }
 
-/*============================================================================*/
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*                                                        SLLFindIntersection */
 /*                                                        ~~~~~~~~~~~~~~~~~~~ */
 sl_node_t *SLLFindIntersection(const sl_node_t *list_1, const sl_node_t *list_2)
@@ -330,7 +330,7 @@ static const sl_node_t *AlignList(const sl_node_t *list,
 
     return (list); 
 }
-/*============================================================================*/
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*                                                           SLLIsListHasLoop */
 /*                                                           ~~~~~~~~~~~~~~~~ */
 sl_node_t *SLLIsListHasLoop(sl_node_t *node)
@@ -364,7 +364,7 @@ sl_node_t *SLLIsListHasLoop(sl_node_t *node)
 	return NO_LOOP;
 }
 
-/*============================================================================*/
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*                                                              SLLRemoveLoop */
 /*                                                              ~~~~~~~~~~~~~ */
 void SLLRemoveLoop(sl_node_t *node)

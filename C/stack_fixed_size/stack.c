@@ -3,10 +3,10 @@
 *                     =====================
 * File Name: stack.c
 * Related files: stack.h stack_test.c
-* #Version: V 1.0
+* #Version: V 1.1
 * Writer: Kobi Medrish       
 * Created: 14.9.19
-* Last update: 16.9.19
+* Last update: 27.11.19
 *******************************************************************************/
 
 
@@ -65,7 +65,7 @@ stack_t *StackCreate(size_t element_size, size_t capacity)
 	return (stack_ptr);
 }
 
-/*============================================================================*/
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*                                                               StackDestroy */
 /*                                                               ~~~~~~~~~~~~ */
 void StackDestroy(stack_t *stack_ptr)
@@ -76,7 +76,7 @@ void StackDestroy(stack_t *stack_ptr)
 	stack_ptr = NULL;
 }
 
-/*============================================================================*/
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*                                                                  StackPush */
 /*                                                                  ~~~~~~~~~ */
 int StackPush(stack_t *stack_ptr, const void *element)
@@ -95,7 +95,7 @@ int StackPush(stack_t *stack_ptr, const void *element)
 	return (0); 
 }
 
-/*============================================================================*/
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*                                                                   StackPop */
 /*                                                                   ~~~~~~~~ */
 void StackPop(stack_t *stack_ptr)
@@ -109,7 +109,7 @@ void StackPop(stack_t *stack_ptr)
 	}
 }
 
-/*============================================================================*/
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*                                                                  StackPeek */
 /*                                                                  ~~~~~~~~~ */
 void *StackPeek(const stack_t *stack_ptr)
@@ -123,7 +123,7 @@ void *StackPeek(const stack_t *stack_ptr)
 	return ((char*)stack_ptr->current - stack_ptr->element_size);
 }
 
-/*============================================================================*/
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*                                                                  StackSize */
 /*                                                                  ~~~~~~~~~ */
 size_t StackSize(const stack_t *stack_ptr)
@@ -134,7 +134,7 @@ size_t StackSize(const stack_t *stack_ptr)
 	         stack_ptr->element_size);
 }
 
-/*============================================================================*/
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*                                                               StackIsEmpty */
 /*                                                               ~~~~~~~~~~~~ */
  size_t StackIsEmpty(const stack_t *stack_ptr)
@@ -143,7 +143,7 @@ size_t StackSize(const stack_t *stack_ptr)
 	return (stack_ptr->current == stack_ptr->head);
  }
 
-/*============================================================================*/
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*                                                                StackIsFull */
 /*                                                                ~~~~~~~~~~~ */
  size_t StackIsFull(const stack_t *stack_ptr)
@@ -151,3 +151,4 @@ size_t StackSize(const stack_t *stack_ptr)
 	assert(stack_ptr);
 	return (stack_ptr->current == stack_ptr->end);
  }
+ 

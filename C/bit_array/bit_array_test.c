@@ -6,7 +6,7 @@
 * #Version: V 1.1
 * Writer: Kobi Medrish       
 * Created: 26.10.19
-* Last update: 26.11.19
+* Last update: 27.11.19
 *******************************************************************************/
 
 /*============================================================================*/
@@ -15,7 +15,7 @@
 /*                                                      standard  directories */
 /*                                                      ~~~~~~~~~~~~~~~~~~~~~ */
 
-#include <stdio.h> /* Used for printf function */
+#include <stdio.h> /* printf */
 #include <stdint.h> /* uint64_t */
 #include <stdlib.h> /* Used for exit function */
 /*============================================================================*/
@@ -71,9 +71,6 @@ static void UnitTestCountOff(void);
 static void Print64BitRepresentation(uint64_t number);
 
 /*============================================================================*/
-
-
-
 
 
 int main()

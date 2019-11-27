@@ -3,10 +3,10 @@
 *                       ========================
 * File Name: stack_test.c
 * Related files: stack.h stack.c
-* #Version: V 1.0
+* #Version: V 1.1
 * Writer: Kobi Medrish       
 * Created: 25.11.19
-* Last update: 25.11.19
+* Last update: 27.11.19
 *******************************************************************************/
 
 /*============================================================================*/
@@ -98,7 +98,9 @@ static void UnitTestStackCreate(void)
 }
 
 /*============================================================================*/
-/*                                               UnitTestStackPush */
+/*                                                          UnitTestStackPush */
+/*                                                          ~~~~~~~~~~~~~~~~~ */
+
 static void UnitTestStackPush(void)
 {
 	stack_t *stack_handle = StackCreate();
@@ -142,7 +144,9 @@ static void UnitTestStackPush(void)
 }
 
 /*============================================================================*/
-/*                                               UnitTestStackPop */
+/*                                                           UnitTestStackPop */
+/*                                                           ~~~~~~~~~~~~~~~~ */
+
 static void UnitTestStackPop(void)
 {
 	stack_t *stack_handle = StackCreate();
