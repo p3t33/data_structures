@@ -72,7 +72,6 @@ static void Print64BitRepresentation(uint64_t number);
 
 /*============================================================================*/
 
-
 int main()
 {
     UnitTestAllOn();
@@ -101,6 +100,11 @@ int main()
     return (0);
 }
 
+/*============================================================================*/
+/*                                 UnitTests                                  */
+/*============================================================================*/
+/*                                                           UnitTestCountOff */
+/*                                                           ~~~~~~~~~~~~~~~~ */
 static void UnitTestCountOff(void)
 {
     uint64_t number = 3;
@@ -112,6 +116,9 @@ static void UnitTestCountOff(void)
     printf("=============================================================\n\n");
 }
 
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*                                                           UnitTestCountOff */
+/*                                                           ~~~~~~~~~~~~~~~~ */
 static void UnitTestCountBitLut(void)
 {
     uint64_t number = 3;
@@ -125,6 +132,9 @@ static void UnitTestCountBitLut(void)
 
 }
 
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*                                                           UnitTestCountOff */
+/*                                                           ~~~~~~~~~~~~~~~~ */
 static void UnitTestCountOn(void)
 {
     uint64_t number = 3;
@@ -138,6 +148,9 @@ static void UnitTestCountOn(void)
    
 }
 
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*                                                           UnitTestCountOff */
+/*                                                           ~~~~~~~~~~~~~~~~ */
 static void UnitTestMirrorBitLut(void)
 {
     uint64_t number = 3;
@@ -152,6 +165,9 @@ static void UnitTestMirrorBitLut(void)
 
 }
 
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*                                                           UnitTestCountOff */
+/*                                                           ~~~~~~~~~~~~~~~~ */
 static void UnitTestMirror(void)
 {
     uint64_t number = 3;
@@ -166,6 +182,9 @@ static void UnitTestMirror(void)
    
 }
 
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*                                                           UnitTestCountOff */
+/*                                                           ~~~~~~~~~~~~~~~~ */
 static void UnitTestRotateRight(void)
 {
     uint64_t number = 7;    
@@ -182,6 +201,9 @@ static void UnitTestRotateRight(void)
    
 }
 
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*                                                           UnitTestCountOff */
+/*                                                           ~~~~~~~~~~~~~~~~ */
 static void UnitTestRotateLeft(void)
 {
     uint64_t number = 3;
@@ -200,6 +222,9 @@ static void UnitTestRotateLeft(void)
    
 }
 
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*                                                           UnitTestCountOff */
+/*                                                           ~~~~~~~~~~~~~~~~ */
 static void UnitTestFlipBit(void)
 {
     uint64_t number = 0;
@@ -216,6 +241,9 @@ static void UnitTestFlipBit(void)
    
 }
 
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*                                                           UnitTestCountOff */
+/*                                                           ~~~~~~~~~~~~~~~~ */
 static void UnitTestIsOff(void)
 {
     uint64_t number = 2;
@@ -235,6 +263,9 @@ static void UnitTestIsOff(void)
    
 }
 
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*                                                           UnitTestCountOff */
+/*                                                           ~~~~~~~~~~~~~~~~ */
 static void UnitTestIsOn(void)
 {
     uint64_t number = 1;
@@ -252,6 +283,9 @@ static void UnitTestIsOn(void)
    
 }
 
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*                                                           UnitTestCountOff */
+/*                                                           ~~~~~~~~~~~~~~~~ */
 static void UnitTestSetBit(void)
 {
     uint64_t number = 1;
@@ -269,6 +303,9 @@ static void UnitTestSetBit(void)
    
 }
 
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*                                                           UnitTestCountOff */
+/*                                                           ~~~~~~~~~~~~~~~~ */
 static void UnitTestSetOff(void)
 {
     uint64_t number = 1;
@@ -286,6 +323,9 @@ static void UnitTestSetOff(void)
    
 }
 
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*                                                           UnitTestCountOff */
+/*                                                           ~~~~~~~~~~~~~~~~ */
 static void UnitTestSetOn(void)
 {
     uint64_t number = 0;
@@ -301,6 +341,9 @@ static void UnitTestSetOn(void)
     printf("=============================================================\n\n");
 }
 
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*                                                           UnitTestCountOff */
+/*                                                           ~~~~~~~~~~~~~~~~ */
 static void UnitTestAllOn(void)
 {
     uint64_t number = 1;
@@ -314,6 +357,9 @@ static void UnitTestAllOn(void)
    
 }
 
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*                                                           UnitTestCountOff */
+/*                                                           ~~~~~~~~~~~~~~~~ */
 static void UnitTestAllOff(void)
 {
     uint64_t number = 1;
